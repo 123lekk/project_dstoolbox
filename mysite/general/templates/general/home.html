@@ -7,9 +7,14 @@
     <meta name="author" content="David Grzyb">
     <meta name="description" content="">
     <!-- Tailwind -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
     <title>Document</title>
 
     <style>
@@ -45,14 +50,15 @@
     </style>
 </head>
 
-<body class="bg-gray-100 font-family-karla flex" style="background-image: url('https://cdn.pixabay.com/photo/2019/04/29/07/46/rice-cultivation-4165415_1280.jpg'); background-size: cover; background-position: center;">
+<body class="bg-gray-100 font-family-karla flex"
+    style="background-image: url('https://cdn.pixabay.com/photo/2019/04/29/07/46/rice-cultivation-4165415_1280.jpg'); background-size: cover; background-position: center;">
 
     <aside class="relative bg-green-500
      h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
             <a class="text-white text-3xl font-semibold uppercase hover:text-gray-300">
                 <i class="fa-solid fa-wheat-awn"></i>จองโต๊ะ ร้าน</a>
-            <a href="#"
+            <a href="{% url 'home' %}"
                 class="text-green-500 w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-tl-lg rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center text-green-500">
                 <i class="fa-solid fa-plus"></i>Home page
             </a>
@@ -62,18 +68,12 @@
 
             <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-tachometer-alt mr-3"></i>
-                เช่าอุปกรณ์
+                จองโต๊ะ
             </a>
 
             <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-align-left mr-3"></i>
-                ทำนายพืช
-            </a>
-
-            <a href="#"
-                class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-calendar mr-3"></i>
-                ปฏิทิน
+                ยกเลิก
             </a>
         </nav>
 
@@ -94,12 +94,12 @@
                 <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
                     {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
-                    <a href="{% url 'dashboard' %}" class="block px-4 py-2 account-link hover:text-white">{{ user.username }}</a>
+                    <a href="{% url 'dashboard' %}" class="block px-4 py-2 account-link hover:text-white">{{
+                        user.username }}</a>
                     {% else %}
                     <a href="{% url 'login' %}" class="block px-4 py-2 account-link hover:text-white">Sign in</a>
                     <a href="{% url 'register' %}" class="block px-4 py-2 account-link hover:text-white">Register</a>
                     {% endif %}
-                    <a href="{% url 'home' %}" class="block px-4 py-2 account-link hover:text-white">หน้าแรก</a>
                 </div>
             </div>
 
@@ -116,65 +116,33 @@
 
             <!-- Dropdown Nav -->
             <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-tachometer-alt mr-3"></i>
-                    Dashboard
+                    จองโต๊ะ
                 </a>
                 <a href="#" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
                     <i class="fas fa-sticky-note mr-3"></i>
-                    Blank Page
+                    ยกเลิก
                 </a>
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-table mr-3"></i>
-                    ข้อมูลการทำนาย
-                </a>
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-align-left mr-3"></i>
-                    ทำนายพืช
-                </a>
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-tablet-alt mr-3"></i>
-                    Tabbed Content
-                </a>
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-calendar mr-3"></i>
-                    Calendar
-                </a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                <a href="{% url 'dashboard' %}" class="block px-4 py-2 account-link hover:text-white">{{
+                    user.username}}</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="block px-4 py-2 account-link hover:text-white">Sign in</a>
+                <a href="{% url 'register' %}" class="block px-4 py-2 account-link hover:text-white">Register</a>
+                {% endif %}
 
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-cogs mr-3"></i>
-                    Support
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-user mr-3"></i>
-                    My Account
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    Sign Out
-                </a>
             </nav>
         </header>
         {% block content %}
-        <div class="text-9xl text-green-900 text-center mt-20 ">
-            <div>ระบบจองโต๊ะ</div>
-            <img src="" alt="">
-        </div>
+
         {% endblock %}
-            
-        </div>
+
+    </div>
     </div>
 
-    <!-- AlpineJS -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
