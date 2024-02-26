@@ -7,174 +7,86 @@
     <meta name="author" content="David Grzyb">
     <meta name="description" content="">
     <!-- Tailwind -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <title>Document</title>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-
-        .font-family-karla {
-            font-family: karla;
-        }
-
-        .bg-sidebar {
-            background: #166534;
-        }
-
-        .cta-btn {
-            color: #166534;
-        }
-
-        .upgrade-btn {
-            background: #166534;
-        }
-
-        .upgrade-btn:hover {
-            background: #166534;
-        }
-
-        .nav-item:hover {
-            background: #166534;
-        }
-
-        .account-link:hover {
-            background: #166534;
-        }
-    </style>
-</head>
-
-<body class="bg-gray-100 font-family-karla flex" style="background-image: url('https://cdn.pixabay.com/photo/2019/04/29/07/46/rice-cultivation-4165415_1280.jpg'); background-size: cover; background-position: center;">
-
-    <aside class="relative bg-green-500
-     h-screen w-64 hidden sm:block shadow-xl">
-        <div class="p-6">
-            <a class="text-white text-3xl font-semibold uppercase hover:text-gray-300">
-                <i class="fa-solid fa-wheat-awn"></i>จองโต๊ะ ร้าน</a>
-            <a href="#"
-                class="text-green-500 w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-tl-lg rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center text-green-500">
-                <i class="fa-solid fa-plus"></i>Home page
-            </a>
-        </div>
-
-        <nav class="text-white font-semibold pt-3">
-
-            <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-tachometer-alt mr-3"></i>
-                เช่าอุปกรณ์
-            </a>
-
-            <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-align-left mr-3"></i>
-                ทำนายพืช
-            </a>
-
-            <a href="#"
-                class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-calendar mr-3"></i>
-                ปฏิทิน
-            </a>
-        </nav>
-
-    </aside>
-
-    <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
-        <!-- Desktop Header -->
-        <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
-            <div class="w-1/2"></div>
-            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
-                <button @click="isOpen = !isOpen"
-                    class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
-                    <img src="https://www.iconpacks.net/icons/2/free-user-icon-3297-thumb.png">
-                </button>
-                <button x-show="isOpen" @click="isOpen = false"
-                    class="h-full w-full fixed inset-0 cursor-default"></button>
-
-                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
-                    <a href="{% url 'dashboard' %}" class="block px-4 py-2 account-link hover:text-white">{{ user.username }}</a>
-                    {% else %}
-                    <a href="{% url 'login' %}" class="block px-4 py-2 account-link hover:text-white">Sign in</a>
-                    <a href="{% url 'register' %}" class="block px-4 py-2 account-link hover:text-white">Register</a>
-                    {% endif %}
-                    <a href="{% url 'home' %}" class="block px-4 py-2 account-link hover:text-white">หน้าแรก</a>
-                </div>
-            </div>
-
-        </header>
-        <!-- Mobile Header & Nav -->
-        <header x-data="{ isOpen: false }" class="w-full bg-green-500 py-5 px-6 sm:hidden">
-            <div class="flex items-center justify-between">
-                <a href="#" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Farmers support</a>
-                <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
-                    <i x-show="!isOpen" class="fas fa-bars"></i>
-                    <i x-show="isOpen" class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <!-- Dropdown Nav -->
-            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-tachometer-alt mr-3"></i>
-                    Dashboard
-                </a>
-                <a href="#" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
-                    <i class="fas fa-sticky-note mr-3"></i>
-                    Blank Page
-                </a>
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-table mr-3"></i>
-                    ข้อมูลการทำนาย
-                </a>
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-align-left mr-3"></i>
-                    ทำนายพืช
-                </a>
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-tablet-alt mr-3"></i>
-                    Tabbed Content
-                </a>
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-calendar mr-3"></i>
-                    Calendar
-                </a>
-
-                <a href="#"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-cogs mr-3"></i>
-                    Support
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-user mr-3"></i>
-                    My Account
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    Sign Out
-                </a>
-            </nav>
-        </header>
-        {% block content %}
-        <div class="text-9xl text-green-900 text-center mt-20 ">
-            <div>ระบบจองโต๊ะ</div>
-            <img src="" alt="">
-        </div>
-        {% endblock %}
-            
-        </div>
-    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
         integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <title>Document</title>
+
+
+<body class="bg-[#2c466f]">
+    <nav class="bg-white border-gray-300 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="{% url 'home' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd"
+                        d="M11.3 3.3a1 1 0 0 1 1.4 0l6 6 2 2a1 1 0 0 1-1.4 1.4l-.3-.3V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3c0 .6-.4 1-1 1H7a2 2 0 0 1-2-2v-6.6l-.3.3a1 1 0 0 1-1.4-1.4l2-2 6-6Z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span href="{% url 'home' %}" class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">จองโต๊ะ ช่างสำราญ</span>
+            </a>
+            <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto"  id="navbar-default">
+                <ul
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                
+                        <a href="{% url 'home' %}"
+                            class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                            aria-current="page">Home</a>
+                    
+
+                    {% if user.is_authenticated %}
+                    
+                        <a href="{% url 'logout' %}"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0
+                            dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">log out</a>
+                    
+
+                    
+                        <a href="{% url 'dashboard' %}"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0
+                            dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{{ user.username }}</a>
+                    
+
+                    {% else %}
+                    
+                        <a href="{% url 'login' %}"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0
+                            dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Sign in</a>
+                    
+
+            
+                        <a href="{% url 'register' %}"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0
+                            dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Register</a>
+                
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    <div class="mt-5 ml-10 bg-[#ffffff] w-80 h-96">
+
+        <div class="mt-10 ml-10 text-center">
+           <h1>เนื้อหาในคอนเทน</h1>
+        </div>
+        
+    </div>
+    {% endblock %}
 </body>
 </html>
