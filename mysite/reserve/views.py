@@ -47,3 +47,7 @@ def reset_reservations(request):
         Table.objects.all().update(is_reserved=False)
 
     return redirect('table_list')
+
+def commit_list(request):
+    tables = Table.objects.all()
+    return render(request, 'reserve/commit_list.html', {'tables': tables})
