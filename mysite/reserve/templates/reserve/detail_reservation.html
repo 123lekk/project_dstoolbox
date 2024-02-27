@@ -1,3 +1,6 @@
+{% extends 'general/home.html' %}
+
+{% block content %}
 <h1>Reservation Details</h1>
 <p>Name: {{ reservation.name }}</p>
 <p>Table Number: {{ reservation.table.table_number }}</p>
@@ -7,3 +10,5 @@
 <p>Time: {{ reservation.time }}</p>
 <p>Number of People: {{ reservation.num_people }}</p>
 <p>Status: {{ reservation.status }}</p>
+
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 from . import views
 
@@ -8,4 +9,5 @@ urlpatterns = [
     path('approve_reservation/<int:reservation_id>/', views.approve_reservation, name='approve_reservation'),
     path('reject_reservation/<int:reservation_id>/', views.reject_reservation, name='reject_reservation'),
     path('reset_reservations/', views.reset_reservations, name='reset_reservations'),
+    path('commit_list/', views.commit_list, name='commit_list'),
 ]

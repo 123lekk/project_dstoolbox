@@ -17,11 +17,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
         integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
     <title>Document</title>
+    {% include 'general/style.html' %}
+</head>
 
 
 <body class="bg-[#2c466f]">
     {% include 'general/topbar.html' %}
     {% block content %}
+
+    {% include 'general/slide.html' %}
+
+    
+
     {% endblock %}
 </body>
 

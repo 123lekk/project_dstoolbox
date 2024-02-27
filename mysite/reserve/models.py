@@ -10,9 +10,9 @@ class Table(models.Model):
 
 class Reservation(models.Model):
     STATUS_CHOICES = [
-        ('Pending', 'Pending'),
-        ('Approved', 'Approved'),
-        ('Rejected', 'Rejected'),
+        ('รอดำเนินการ', 'รอดำเนินการ'),
+        ('ยอมรับ', 'ยอมรับ'),
+        ('ปฎิเสธ', 'ปฎิเสธ'),
     ]
 
     name = models.CharField(max_length=100)
@@ -22,7 +22,7 @@ class Reservation(models.Model):
     date = models.DateField()
     time = models.TimeField()
     num_people = models.IntegerField()
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='รอดำเนินการ')
 
     def __str__(self):
         return f'Reservation for {self.name} at Table {self.table.table_number}'

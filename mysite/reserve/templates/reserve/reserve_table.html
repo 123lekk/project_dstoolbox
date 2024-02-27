@@ -1,6 +1,10 @@
+{% extends 'general/home.html' %}
+
+{% block content %}
 <h1>Reserve Table {{ table.table_number }}</h1>
 <form method="post" action="">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Reserve</button>
 </form>
+{% endblock %}
