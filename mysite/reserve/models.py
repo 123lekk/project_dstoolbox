@@ -2,11 +2,11 @@ from django.db import models
 from datetime import time
 
 class Table(models.Model):
-    table_number = models.IntegerField(unique=True)
+    table_name = models.CharField(max_length=100, unique=True , null=True)
     is_reserved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Table {self.table_number}'
+        return f'Table {self.table_name}'
 
 class Reservation(models.Model):
     STATUS_CHOICES = [
@@ -25,4 +25,4 @@ class Reservation(models.Model):
     status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='รอดำเนินการ')
 
     def __str__(self):
-        return f'Reservation for {self.name} at Table {self.table.table_number}'
+        return f'Reservation for {self.name} at Table {self.table.table_name}'

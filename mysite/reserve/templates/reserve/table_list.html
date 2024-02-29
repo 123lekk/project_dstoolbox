@@ -5,13 +5,14 @@
 <ul>
   {% for table in tables %}
     <li>
-      Table {{ table.table_number }}
+      Table {{ table.table_name }}
+      
       {% if table.is_reserved %}
         (Reserved)
       {% else %}
         (Available)
       {% endif %}
-      <a href="{% url 'reserve_table' table.table_number %}">Reserve</a>
+      <a href="{% url 'reserve_table' table.table_name %}">Reserve</a>
     </li>
   {% endfor %}  
 </ul>

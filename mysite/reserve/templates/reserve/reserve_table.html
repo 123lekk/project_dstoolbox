@@ -1,10 +1,47 @@
 {% extends 'general/home.html' %}
 
 {% block content %}
-<h1>Reserve Table {{ table.table_number }}</h1>
-<form method="post" action="">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Reserve</button>
-</form>
+<div class="flex justify-center mt-5">
+<h1 class="text-3xl font-bold mb-6 ">Reserve Table {{ table.table_name }}</h1>
+</div>
+<div class="flex justify-center ">
+  <form method="post" action="" class="w-96">
+    {% csrf_token %}
+
+    <div class="mb-4">
+      <label for="id_name" class="block text-sm font-medium text-gray-50">Name</label>
+      <input type="text" name="name" id="id_name"
+        class="mt-1 p-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-primary-300">
+    </div>
+
+    <div class="mb-4">
+      <label for="id_phone" class="block text-sm font-medium text-gray-50">Phone</label>
+      <input type="text" name="phone" id="id_phone"
+        class="mt-1 p-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-primary-300">
+    </div>
+
+    <div class="mb-4">
+      <label for="id_date" class="block text-sm font-medium text-gray-50">Date</label>
+      <input type="date" name="date" id="id_date"
+        class="mt-1 p-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-primary-300">
+    </div>
+
+    <div class="mb-4">
+      <label for="id_time" class="block text-sm font-medium text-gray-50">Time</label>
+      <input type="time" name="time" id="id_time"
+        class="mt-1 p-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-primary-300">
+    </div>
+
+    <div class="mb-4">
+      <label for="id_num_people" class="block text-sm font-medium text-gray-50">Number of People</label>
+      <input type="number" name="num_people" id="id_num_people"
+        class="mt-1 p-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-primary-300">
+    </div>
+
+    <button type="submit"
+      class="w-full bg-green-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+      Reserve Table
+    </button>
+  </form>
+</div>
 {% endblock %}

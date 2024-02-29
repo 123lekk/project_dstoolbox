@@ -51,7 +51,7 @@
                           {{ reservation.name }}
                         </td>
                         <td class="px-6 py-4">
-                          {{ reservation.table.table_number }}
+                          {{ reservation.table.table_name }}
                         </td>
                         <td class="px-6 py-4">
                           {{ reservation.phone }}
@@ -69,9 +69,11 @@
                           {{ reservation.status }}
                         </td>
                         <td>
-                          {% if reservation.status == 'Pending' %}
+                          {% if reservation.status == 'รอดำเนินการ' %}
                             <a href="{% url 'approve_reservation' reservation.id %}">ยื่นยันการจอง</a>
                             <a href="{% url 'reject_reservation' reservation.id %}">ปฏิเสธ</a>
+                          {% elif reservation.status == 'ยอมรับ' %}
+                            <a href="#"></a>
                           {% endif %}
                         </td>
                     {% endfor %}

@@ -16,11 +16,11 @@
 
                 <div class="border bg-slate-50 rounded-lg shadow-xl">
                     <i class='bx bx-book-bookmark p-2 text-3xl rounded-lg'></i>
-                    <p class="p-2">โต๊ะ {{i.table_number}}</p>
+                    <p class="p-2">โต๊ะ {{i.table_name}}</p>
                     <p class="p-2">สถานะ :
                         <i class='bx bx-check mx-2 bg-green-500 text-lg border rounded-md px-2'></i> พร้อมจอง
                     </p>
-                    <a href="{% url 'table_list' %}" class="">
+                    <a href="{% url 'reserve_table' i.table_name %}" class="">
                         <div class="ml-4 mr-4 p-2 bg-green-600 hover:scale-105 text-lg border rounded-md px-2 mb-2">
                             กดจอง
                         </div>
