@@ -83,6 +83,7 @@ def booking_list(request):
             booking_list = Booking_drink.objects.filter(user=request.user,cancel=False)
     return render(request,'booking_list.html',{'booking_list':booking_list})
 
+
 def permissions(request,id):
     booking_list = Booking_drink.objects.get(pk=id)
     booking_list.status = True
