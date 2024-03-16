@@ -1,0 +1,70 @@
+{% extends 'home.html' %}
+
+{% load static %}
+
+{% block content %}
+    <main>
+        <div class="slider">
+            <div class="slides">
+                <div class="slide">
+                    <img src="https://cdn.pixabay.com/photo/2014/08/27/19/15/liquor-429428_1280.jpg" alt="Slide 1">
+                </div>
+                <div class="slide">
+                    <img src="https://cdn.pixabay.com/photo/2017/09/09/18/33/wine-2732982_1280.jpg"
+                        alt="Slide 2">
+                </div>
+                <div class="slide">
+                    <img src="https://cdn.pixabay.com/photo/2018/07/22/23/16/eat-drink-3555763_1280.jpg" alt="Slide 3">
+                </div>
+                <!-- เพิ่มภาพสไลด์เพิ่มเติมตามต้องการ -->
+            </div>
+            <div class="slider-controls">
+                <button class="slider-control" onclick="prevSlide()">❮</button>
+                <button class="slider-control" onclick="nextSlide()">❯</button>
+            </div>
+
+        </div>
+        <div class="tableimg1 mt-5 flex grid-cols-2">
+            <div class="drop-shadow-lg ">
+                <img src="423105872_410650581639530_8949529716849264823_n.jpg" alt="imgtable">
+            </div>
+
+            <div class="drop-shadow-lg">
+                <img src="https://scontent.fubp1-1.fna.fbcdn.net/v/t39.30808-6/429937680_1147822039922276_3396702224830539591_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_eui2=AeFpwfCwJIci053tAl4PlVETlYYSYoSCfISVhhJihIJ8hJJ0LRlJ9n0Cqn5GSK12kDtxXyI4n3_F7cYGReKv_qP3&_nc_ohc=d4tQ_sKVDaQAX_UBese&_nc_ht=scontent.fubp1-1.fna&oh=00_AfBIYaZzXvhjn7291dbelAJamgYi6dL07ZB5cZwCeHOZvw&oe=65E32849" alt="imgtable">
+            </div>
+
+        </div>
+    </main>
+    
+
+    <script>
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelector('.slides');
+            const totalSlides = document.querySelectorAll('.slide').length;
+
+            if (index >= totalSlides) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = index;
+            }
+
+            const translateValue = -currentSlide * 100 + '%';
+            slides.style.transform = 'translateX(' + translateValue + ')';
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        setInterval(nextSlide, 5000); // อัตโนมัติเปลี่ยนภาพทุก 5 วินาที
+
+    </script>
+{% endblock %}
